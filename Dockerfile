@@ -1,4 +1,4 @@
-FROM alpine as builder
+FROM arm32v6/alpine as builder
 
 RUN apk --no-cache add --virtual sdcc-build-dependencies \
     git \
@@ -21,8 +21,9 @@ RUN ./configure \
     --disable-pic16-port
 RUN make install
 
-FROM alpine
+FROM arm32v6/alpine
 
 COPY --from=builder /opt/sdcc/ /opt/sdcc/
 
 ENV PATH $PATH:/opt/sdcc/bin/
+
