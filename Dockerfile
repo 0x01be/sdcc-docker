@@ -25,4 +25,7 @@ FROM alpine
 
 COPY --from=builder /opt/sdcc/ /opt/sdcc/
 
+RUN apk --no-cache add --virtual sdcc-runtime-dependencies \
+    libstdc++
+
 ENV PATH $PATH:/opt/sdcc/bin/
